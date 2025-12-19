@@ -17,7 +17,7 @@ class BoardBase:
     You are free to look around the members of this class and their implementation, however you will not need to change
     anything in this class for any of the tasks.
     """
-
+#test gleichzeitig artbeit djsdfjdl
     def __init__(self):
         """Constructor.
         Start with empty cells
