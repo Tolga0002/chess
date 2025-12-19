@@ -8,9 +8,6 @@ from util import (
     InvalidColumnException,
     InvalidRowException,
 )
-# Test von Marlon
-# Test von Tolga
-# Test gleichzeitig Arbeit
 
 class BoardBase:
     """
@@ -18,7 +15,6 @@ class BoardBase:
     You are free to look around the members of this class and their implementation, however you will not need to change
     anything in this class for any of the tasks.
     """
-#test gleichzeitig artbeit djsdfjdl
     def __init__(self):
         """Constructor.
         Start with empty cells
@@ -257,7 +253,6 @@ class Board(BoardBase):
         :return: The :py:class:'King': object of the given color or None if there is no King on the board.
         """
         # TODO: Implement
-        #neuer test Tolga / Marlon
 
 
     def is_king_check(self, white):
@@ -271,7 +266,7 @@ class Board(BoardBase):
         Iterate over each reachable cell and check if the kings cell is reachable. If yes, shortcut and return True right away.
         """
         # TODO: Implement
-        # neuer Test Tolga
+
 
     def evaluate(self):
         """
@@ -297,7 +292,7 @@ class Board(BoardBase):
         being within the allowed range (0 to 7 inclusively).
         Don´t forget to handle the special case of "cell" being None. Return False in that case
         """
-        # TODO: Implement # Marlon hat hier bearbeitet / berrichtigt von Tolga
+        # TODO: Implement # Marlon hat hier bearbeitet / berichtigt von Tolga
 
         if cell != None: # Falls cell kein Tupel erhält (Tolga)
                 
@@ -349,7 +344,7 @@ class Board(BoardBase):
         If, however, there is another piece, it must be of opposing color. Check the other pieces "white" attribute and compare against
         the given piece "white" attribute.
         """
-        # TODO: Implement # Marlon hat hier bearbeitet / berrichtigt von Tolga
+        # TODO: Implement # Marlon hat hier bearbeitet / berichtigt von Tolga
 
         # Checks if cell is valid
         if self.is_valid_cell(cell) is False:
@@ -389,7 +384,7 @@ class Board(BoardBase):
             # Checks if there is an opposing piece placed on the cell
             if self.get_cell(cell) is None:
                 return False
-            elif self.get_cell(cell).is_white() != piece.is_white():           # Berrichtigung von Tolga statt self.is_white() -> self.get_cell(cell).is_white() da sonst board ausgewählt wird statt piece
+            elif self.get_cell(cell).is_white() != piece.is_white():           # Berichtigung von Tolga statt self.is_white() -> self.get_cell(cell).is_white() da sonst board ausgewählt wird statt piece
                 return True
             else:
                 return False
