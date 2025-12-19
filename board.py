@@ -257,6 +257,7 @@ class Board(BoardBase):
         :return: The :py:class:'King': object of the given color or None if there is no King on the board.
         """
         # TODO: Implement
+        #neuer test123
 
     def is_king_check(self, white):
         """
