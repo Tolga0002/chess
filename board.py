@@ -297,15 +297,17 @@ class Board(BoardBase):
         being within the allowed range (0 to 7 inclusively).
         Don´t forget to handle the special case of "cell" being None. Return False in that case
         """
-        # TODO: Implement # Marlon hat hier bearbeitet
-       
-        # Unpack the tuple "cell" into "(row, col)"
-        row, col = cell
+        # TODO: Implement # Marlon hat hier bearbeitet / berrichtigt von Tolga
 
-        # Check if "row" and "col" are on the 8x8 bord
-        if row >= 0 and row <= 7 and col >= 0 and col <= 7:
-            return True
-        # Cell is not on the bord
+        if cell != None: # Falls cell kein Tupel erhält (Tolga)
+                
+            # Unpack the tuple "cell" into "(row, col)"
+            row, col = cell
+
+            # Check if "row" and "col" are on the 8x8 bord
+            if row >= 0 and row <= 7 and col >= 0 and col <= 7:
+                return True
+            # Cell is not on the bord
         else:
             return False
 
@@ -347,7 +349,7 @@ class Board(BoardBase):
         If, however, there is another piece, it must be of opposing color. Check the other pieces "white" attribute and compare against
         the given piece "white" attribute.
         """
-        # TODO: Implement # Marlon hat hier bearbeitet
+        # TODO: Implement # Marlon hat hier bearbeitet / berrichtigt von Tolga
 
         # Checks if cell is valid
         if self.is_valid_cell(cell) is False:
@@ -358,10 +360,10 @@ class Board(BoardBase):
         # Checks if piece is placed on it 
         elif self.get_cell(cell) is not None:
             # Checks if piece is white or black
-            if self.is_white() is False:
-                return True
-            else:
+            if self.get_cell(cell).is_white() == piece.is_white():       # (Tolga)
                 return False
+            else:
+                return True
 
         #pass
 
@@ -387,10 +389,10 @@ class Board(BoardBase):
             # Checks if there is an opposing piece placed on the cell
             if self.get_cell(cell) is None:
                 return False
-            elif self.is_white() is True:
-                return False
-            else:
+            elif self.get_cell(cell).is_white() != piece.is_white():           # Berrichtigung von Tolga statt self.is_white() -> self.get_cell(cell).is_white() da sonst board ausgewählt wird statt piece
                 return True
+            else:
+                return False
         else:
             return False
 
