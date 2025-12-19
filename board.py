@@ -269,6 +269,7 @@ class Board(BoardBase):
         Iterate over each reachable cell and check if the kings cell is reachable. If yes, shortcut and return True right away.
         """
         # TODO: Implement
+        # neuer Test Tolga
 
     def evaluate(self):
         """
