@@ -157,6 +157,32 @@ class Knight(Piece):  # Springer
         :return: A list of reachable cells this knight could move into.
         """
         # TODO: Implement a method that returns all cells this piece can enter in its next move
+        
+        #Implemented by: azcn03
+        
+        # PLAN:
+        #1. Knight only has 8 possible moves, i will create a list of those 8 moves
+        #2. Go trough every move and see if either the cell they wanna go to is empty OR an opposing piece is there (that the cells are valid is already assumed)
+        #3. Return the list of those moves
+
+
+        #IMPLEMENTATION:
+        reachable_cells = []
+        (row, col) = self.cell
+        
+        #Because the Knight moves in 2 in one directions 1 in the other those are the 8 possibilities
+        possible_moves = [(2, 1), (2, -1), (1, 2), (-1, 2), (-2, 1), (-2, -1), (1,-2), (-1,-2)]
+
+        for j, k in possible_moves:
+            #We save the new Position in "new_cell"
+            new_cell = (row + j, col + k)
+
+            #We use the method "piece_can_enter_cell", because it perfectly catches the case of
+            #Either the new Cell has to be empty or an opposing piece has to be there
+            if self.board.piece_can_enter_cell(self, new_cell):
+                reachable_cells.append(new_cell)      
+                  
+        return reachable_cells
 
 
 class Bishop(Piece):  # Läufer
@@ -179,6 +205,40 @@ class Bishop(Piece):  # Läufer
         :return: A list of reachable cells this bishop could move into.
         """
         # TODO: Implement a method that returns all cells this piece can enter in its next move
+       
+        #Implemented by: azcn03
+
+        #PLAN:
+        #1. Bishop can move diagonally in 4 directions, which is one of the moves of the list below "direction" but multiple times
+        #2. I will implement this in a list with tuples and increase both elements with one after every turn 
+        #3. Now go one step diagonally and check for
+        #       -if cell is empty and valid then repeat and add one step
+        #       -if the cell isn't empty check if it's an opponent then add that step and stop that direction because you can't go through an opponent 
+
+        #IMPLEMENTATION:
+        reachable_cells = []
+        (row, col) = self.cell
+
+        # Here is the list of his Directions
+        direction = [(1, 1), (1, -1), (-1, 1), (-1, -1)]
+
+        #Unpack the tuple's from the list in j and k
+        for j, k in direction:
+            #add the current position they are in to the possible direction once
+            new_cell = (row + j, col + k) #3 and 3 then it will become 4 and 4 for E.g. with the first tuple from the list (1, 1)
+            
+            #while it's empty move forward
+            while self.board.cell_is_valid_and_empty(new_cell):
+                reachable_cells.append(new_cell)
+                #unpack tuple so we know where on the board we are
+                (new_row, new_col) = new_cell
+                #add the direction we are going toward again E.g. (1, 1) and save in new cell
+                new_cell = (new_row + j, new_col + k)
+            
+            #if we are here the next cell wasn't empty, so we check if it's an opponent
+            #if so add that cell once to the list, then return to the start of the for loop and do all that again with E.g.(1, -1)
+            if self.board.piece_can_hit_on_cell(self, new_cell):
+                reachable_cells.append(new_cell)
 
 
 class Queen(Piece):  # Königin
