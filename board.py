@@ -254,6 +254,23 @@ class Board(BoardBase):
         """
         # TODO: Implement
 
+        #Implemented by: azcn03
+
+        #PLAN
+        # 1. use the iterate_cells_with_pieces() method to get every piece of the given color 
+        # 2. check if the given piece is from the class King
+        # 
+        # Sources:
+        # https://stackoverflow.com/questions/14549405/python-check-instances-of-classes 
+        # https://www.w3schools.com/python/ref_func_isinstance.asp
+
+        # use an iterator to get every piece one by one, piece is the current piece
+        for piece in self.iterate_cells_with_pieces(white):
+            # ok so basically isinstance() returns true or false wether a given object is an instance of a class
+            # and we check if that piece we have is an instance of the class King
+            if isinstance(piece, King):
+                #if so return piece
+                return piece
 
     def is_king_check(self, white):
         """
@@ -266,6 +283,35 @@ class Board(BoardBase):
         Iterate over each reachable cell and check if the kings cell is reachable. If yes, shortcut and return True right away.
         """
         # TODO: Implement
+
+        #implemented by: azcn03
+
+        #PLAN
+        # 1.We use find_king and the given color to find our King
+        # 2.take his position
+        # 3.iterate over every piece of the opposing color
+        # 4.iterate over every possible move of that piece
+        # 5.check if the position of the king is the same as any possible move of the opponent
+        
+        #we give the variable called "king" the value of the king piece of the given color
+        king = self.find_king(white)
+
+        #we unpack the tuple of the king position (because otherwise we get a ValueError 
+        #and the fix https://stackoverflow.com/questions/59222146/how-to-compare-equality-of-two-tuples-that-involve-with-list) is overkill for right now
+        king_row, king_col = king.cell
+
+        #we iterate over every piece with the opposing color
+        for piece in self.iterate_cells_with_pieces(not white):
+            
+            #now we take the current piece and get all possible moves of that piece as a list
+            #we iterate over every possible move that piece can make
+            for position in piece.get_reachable_cells():
+                #we unpack the tuple of position for the same reason as before
+                enemy_row, enemy_col = position
+
+                #now we check if the king's row and col is the same as the enemy's row and columns
+                if king_row == enemy_row and king_col == enemy_col:
+                    return True
 
 
     def evaluate(self):

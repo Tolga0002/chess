@@ -157,16 +157,14 @@ class Knight(Piece):  # Springer
         :return: A list of reachable cells this knight could move into.
         """
         # TODO: Implement a method that returns all cells this piece can enter in its next move
-        
+
         #Implemented by: azcn03
-        
+
         # PLAN:
         #1. Knight only has 8 possible moves, i will create a list of those 8 moves
         #2. Go trough every move and see if either the cell they wanna go to is empty OR an opposing piece is there (that the cells are valid is already assumed)
         #3. Return the list of those moves
 
-
-        #IMPLEMENTATION:
         reachable_cells = []
         (row, col) = self.cell
         
@@ -176,12 +174,11 @@ class Knight(Piece):  # Springer
         for j, k in possible_moves:
             #We save the new Position in "new_cell"
             new_cell = (row + j, col + k)
-
             #We use the method "piece_can_enter_cell", because it perfectly catches the case of
             #Either the new Cell has to be empty or an opposing piece has to be there
             if self.board.piece_can_enter_cell(self, new_cell):
-                reachable_cells.append(new_cell)      
-                  
+                reachable_cells.append(new_cell)        
+       
         return reachable_cells
 
 
